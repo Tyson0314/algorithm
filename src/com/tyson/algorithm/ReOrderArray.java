@@ -26,8 +26,8 @@ public class ReOrderArray {
 		int right = array.length - 1;
 		
 		while(left<right) {
-			while(left<right&&isEven(array[left])) left++;
-			while(left<right&&!isEven(array[right])) right--;
+			while(left<right&&isOdd(array[left])) left++;
+			while(left<right&&!isOdd(array[right])) right--;
 			
 			if(left<right) 
 				swap(array, left, right);
@@ -45,14 +45,14 @@ public class ReOrderArray {
 				else {
 					int tmp = array[i];
 					
-					//for(int m=j;m>)
+					
 				}
 					
 			}
 		}
 	}
 	
-	public static boolean isEven(int n) {
+	public static boolean isOdd(int n) {
 		if((n&0x01)==1) 
 			return true;
 		else
