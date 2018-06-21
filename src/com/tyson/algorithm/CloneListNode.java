@@ -18,40 +18,68 @@ package com.tyson.algorithm;
 public class CloneListNode {
 	public RandomListNode Clone(RandomListNode pHead)
     {		
-        if(pHead == null) {
-        	return null;
+//        if(pHead == null) {
+//        	return null;
+//        }
+//        
+//        RandomListNode pClone = pHead;
+//        
+//        while(pClone!=null) {
+//        	RandomListNode node = new RandomListNode(pClone.label);
+//        	node.next = pClone.next;
+//        	pClone.next = node;
+//        	pClone = node.next;
+//        }
+//        
+//        pClone = pHead;
+//        while(pClone!=null) {
+//        	if(pClone.random != null) 
+//        		pClone.next.random = pClone.random.next;
+//        	pClone = pClone.next.next;
+//        }
+//          
+//        
+//        RandomListNode head = pHead.next;
+//        pClone = head;
+//        RandomListNode pCur = pHead;
+//        
+//        while(pCur != null) {
+//        	pCur.next = pCur.next.next;	//添加
+//        	if(pClone.next != null) 
+//        		pClone.next = pClone.next.next;
+//        	pClone = pClone.next;
+//        	pCur = pCur.next;
+//        }
+//        
+//        return head;
+		
+		if(pHead == null)
+            return null;
+        
+        RandomListNode node = pHead;
+        
+        while(node != null) {
+            RandomListNode tmp = new RandomListNode(node.label);
+            tmp.next = node.next;
+            node.next = tmp;
+            node = tmp.next;
         }
         
-        RandomListNode pClone = pHead;
-        
-        while(pClone!=null) {
-        	RandomListNode node = new RandomListNode(pClone.label);
-        	node.next = pClone.next;
-        	pClone.next = node;
-        	pClone = node.next;
+        node = pHead;
+        while(node != null) {
+            node.next.random = node.random;
+            node = node.next.next;
         }
         
-        pClone = pHead;
-        while(pClone!=null) {
-        	if(pClone.random != null) 
-        		pClone.next.random = pClone.random.next;
-        	pClone = pClone.next.next;
-        }
-          
-        
-        RandomListNode head = pHead.next;
-        pClone = head;
-        RandomListNode pCur = pHead;
-        
-        while(pCur != null) {
-        	pCur.next = pCur.next.next;	//添加
-        	if(pClone.next != null) 
-        		pClone.next = pClone.next.next;
-        	pClone = pClone.next;
-        	pCur = pCur.next;
+        RandomListNode result = pHead.next;
+        RandomListNode head = result;
+        node = pHead;
+        while(head.next != null) {
+            head.next = head.next.next;
+            head = head.next;
         }
         
-        return head;
+        return result;
     }
 	public static void main(String[] args) {
 		RandomListNode r1 = new RandomListNode(1);
@@ -60,12 +88,17 @@ public class CloneListNode {
 		RandomListNode r4 = new RandomListNode(4);
 		RandomListNode r5 = new RandomListNode(5);
 		RandomListNode r6 = new RandomListNode(6);
+		RandomListNode r7 = new RandomListNode(7);
+		RandomListNode r8 = new RandomListNode(8);
+		
 		
 		r1.next = r2;
 		r2.next = r3;
 		r3.next = r4;
 		r4.next = r5;
 		r5.next = r6;
+		r6.next = r8;
+		r8.next = r7;
 		
 		r2.random = r4;
 		r3.random = r1;

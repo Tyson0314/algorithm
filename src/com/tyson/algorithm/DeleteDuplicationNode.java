@@ -40,4 +40,66 @@ public class DeleteDuplicationNode {
         
         return first.next;
 	}
+	
+	public ListNode deleteDuplication1(ListNode pHead)
+    {
+        if(pHead == null || pHead.next == null)
+            return pHead;
+        
+        ListNode pre = new ListNode(-1);
+        ListNode current = pHead;
+        ListNode next = pHead;
+        ListNode result = pre;
+        
+        while(current.next != null) {
+            next = current.next;
+            
+            if(current.val == next.val) {
+                while(next.next != null && current.val == next.val) {
+                    next = next.next;
+                }
+                if(current.val == next.val)
+                    break;
+                else {
+                    current = next;
+                    pre.next = current;
+                }
+            }
+            else {
+                pre.next = current;
+                pre = current;
+                current = next;
+            } 
+        }
+        
+        return result.next;
+    }
+	
+	public static void main(String[] args) {
+		DeleteDuplicationNode ddn = new DeleteDuplicationNode();
+		
+		ListNode l1 = new ListNode(1);
+		ListNode l2 = new ListNode(1);
+		ListNode l3 = new ListNode(2);
+		ListNode l4 = new ListNode(2);
+		ListNode l5 = new ListNode(3);
+		ListNode l6 = new ListNode(3);
+		ListNode l7 = new ListNode(4);
+		ListNode l8 = new ListNode(4);
+		
+		l1.next = l2;
+		l2.next = l3;
+		l3.next = l4;
+		l4.next = l5;
+		l5.next = l6;
+		l6.next = l7;
+		l7.next = l8;
+		
+		ListNode l = ddn.deleteDuplication1(l1);
+		
+		while(l != null) {
+			System.out.println(l.val);
+			l = l.next;
+		}
+	}
 }
